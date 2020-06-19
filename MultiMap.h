@@ -2,15 +2,22 @@
 //
 //    FILE: multimap.h
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.1.1
+// VERSION: 0.1.2
+//    DATE: 2011-01-26
 // PURPOSE: Arduino library for fast non-linear mapping or interpolation of values
 //     URL: https://github.com/RobTillaart/MultiMap
 //     URL: http://playground.arduino.cc/Main/MultiMap
 //
-// HISTORY: see playground article
+// HISTORY:
+// 0.0.1    2011-01-26 initial version (see forum)
+// .....
+// 0.1.0    2015-03-29
+// 0.1.1    2020-04-09
+// 0.1.2    2020-06-19 fix library.json
+//
 //
 
-#define MULTIMAP_LIB_VERSION "0.1.1"
+#define MULTIMAP_LIB_VERSION "0.1.2"
 
 #include <Arduino.h>
 
