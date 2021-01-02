@@ -72,12 +72,13 @@ unittest(test_all)
   // in[] holds the measured analogRead() values for that distance
   float in[]  = { 90, 97, 105, 113, 124, 134, 147, 164, 185, 218, 255, 317, 408, 506};
 
-  assertEqualFloat(0, multiMap<float>(100, in, out, 14), 0.001);
-  assertEqualFloat(0, multiMap<float>(200, in, out, 14), 0.001);
-  assertEqualFloat(0, multiMap<float>(300, in, out, 14), 0.001);
-  assertEqualFloat(0, multiMap<float>(400, in, out, 14), 0.001);
-  assertEqualFloat(0, multiMap<float>(500, in, out, 14), 0.001);
-  assertEqualFloat(0, multiMap<float>(600, in, out, 14), 0.001);
+  assertEqualFloat(150.000, multiMap<float>(80, in, out, 14), 0.001);
+  assertEqualFloat(136.250, multiMap<float>(100, in, out, 14), 0.001);
+  assertEqualFloat(65.4545, multiMap<float>(200, in, out, 14), 0.001);
+  assertEqualFloat(42.7419, multiMap<float>(300, in, out, 14), 0.001);
+  assertEqualFloat(30.8791, multiMap<float>(400, in, out, 14), 0.001);
+  assertEqualFloat(20.6122, multiMap<float>(500, in, out, 14), 0.001);
+  assertEqualFloat(20.0000, multiMap<float>(600, in, out, 14), 0.001);
 
   assertEqual(1, 1);
 }
