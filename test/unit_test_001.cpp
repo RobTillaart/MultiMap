@@ -36,9 +36,7 @@
 // #define assertEqualNAN(arg)  assertOp("assertEqualNAN", "expected", true, compareEqual, "==", "actual", isnan(arg))
 
 
-#include "Arduino.h"
 #include "MultiMap.h"
-
 
 
 unittest_setup()
@@ -79,8 +77,6 @@ unittest(test_all)
   assertEqualFloat(30.8791, multiMap<float>(400, in, out, 14), 0.001);
   assertEqualFloat(20.6122, multiMap<float>(500, in, out, 14), 0.001);
   assertEqualFloat(20.0000, multiMap<float>(600, in, out, 14), 0.001);
-
-  assertEqual(1, 1);
 }
 
 unittest_main()
