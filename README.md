@@ -1,7 +1,10 @@
 
 [![Arduino CI](https://github.com/RobTillaart/MultiMap/workflows/Arduino%20CI/badge.svg)](https://github.com/marketplace/actions/arduino_ci)
+[![Arduino-lint](https://github.com/RobTillaart/MultiMap/actions/workflows/arduino-lint.yml/badge.svg)](https://github.com/RobTillaart/MultiMap/actions/workflows/arduino-lint.yml)
+[![JSON check](https://github.com/RobTillaart/MultiMap/actions/workflows/jsoncheck.yml/badge.svg)](https://github.com/RobTillaart/MultiMap/actions/workflows/jsoncheck.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobTillaart/MultiMap/blob/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/RobTillaart/MultiMap.svg?maxAge=3600)](https://github.com/RobTillaart/MultiMap/releases)
+
 
 # MultiMap
 
@@ -44,6 +47,12 @@ See examples
 Please note the fail example as this shows that in the intern math overflow can happen.
 
 
-## TODO
+## Future
 
-Investigate class implementation for performance.
+- Investigate class implementation for performance / footprint
+- flag if input value was "IN_MIN" <  input < "IN_MAX", 
+  now it is constrained without user being informed.
+- should the lookup tables be merged into one array of pairs?
+  - you cannot reuse e.g. the input array then.
+- 
+- 

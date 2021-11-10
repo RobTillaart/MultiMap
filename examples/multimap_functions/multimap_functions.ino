@@ -6,6 +6,8 @@
 //    DATE: 2020-04-09
 //    (c) : MIT
 //
+//  example show use of multiMap to approximate some well known functions.
+
 
 
 #include "MultiMap.h"

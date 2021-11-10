@@ -5,6 +5,7 @@
 // PURPOSE: demo
 //    DATE: 2020-04-09
 //
+//  example simulates the lookup graph of a distance sensor 
 
 
 #include "MultiMap.h"
