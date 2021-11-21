@@ -18,5 +18,6 @@
   "version": "0.1.4",
   "license": "MIT",
   "frameworks": "arduino",
-  "platforms": "*"
+  "platforms": "*",
+  "headers": "MultiMap.h"
 }
