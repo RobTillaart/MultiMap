@@ -85,13 +85,13 @@ unittest(test_uint32_t)
   // in[] holds the measured analogRead() values for that distance
   uint32_t in[]  = { 90, 97, 105, 113, 124, 134, 147, 164, 185, 218, 255, 317, 408, 506};
 
-  assertEqualFloat(150, multiMap<uint32_t>(80, in, out, 14)  );
-  assertEqualFloat(136, multiMap<uint32_t>(100, in, out, 14) );
-  assertEqualFloat( 65, multiMap<uint32_t>(200, in, out, 14) );
-  assertEqualFloat( 42, multiMap<uint32_t>(300, in, out, 14) );
-  assertEqualFloat( 30, multiMap<uint32_t>(400, in, out, 14) );
-  assertEqualFloat( 20, multiMap<uint32_t>(500, in, out, 14) );
-  assertEqualFloat( 20, multiMap<uint32_t>(600, in, out, 14) );
+  assertEqual(150, multiMap<uint32_t>(80, in, out, 14)  );
+  assertEqual(136, multiMap<uint32_t>(100, in, out, 14) );
+  assertEqual( 65, multiMap<uint32_t>(200, in, out, 14) );
+  assertEqual( 42, multiMap<uint32_t>(300, in, out, 14) );
+  assertEqual( 30, multiMap<uint32_t>(400, in, out, 14) );
+  assertEqual( 20, multiMap<uint32_t>(500, in, out, 14) );
+  assertEqual( 20, multiMap<uint32_t>(600, in, out, 14) );
 }
 
 
