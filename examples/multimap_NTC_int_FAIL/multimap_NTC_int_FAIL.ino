@@ -1,16 +1,15 @@
 //
 //    FILE: multimap_NTC_int_FAIL.ino
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.1.1
 // PURPOSE: demo of faulty optimizing 
 //    DATE: 2020-04-09
 //    (c) : MIT
 //
-
+//
 // NOTE:
 // use integers instead of floats to minimize RAM. uses ~320 bytes PROGMEM ~120 bytes RAM less on UNO than float version
 //
-// this example is added to show how to reduce memory but  also how it can FAIL due to math overflow
+// this example is added to show how to reduce memory but also how it can FAIL due to math overflow
 // E.g. see around 196-200; 340-400
 // to prevent this one must have more values which increases the memory usage again.
 // 
@@ -92,3 +91,4 @@ float val(int sensorValueA1)
 
 
 // -- END OF FILE --
+

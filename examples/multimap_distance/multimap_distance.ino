@@ -1,7 +1,6 @@
 //
 //    FILE: multimap_distance.ino
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.1.1
 // PURPOSE: demo
 //    DATE: 2020-04-09
 //
@@ -49,3 +48,4 @@ float sharp2cm(int val)
 
 
 // -- END OF FILE --
+

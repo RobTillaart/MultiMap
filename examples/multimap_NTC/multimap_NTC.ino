@@ -1,7 +1,6 @@
 //
 //    FILE: multimap_NTC.ino
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.1.1
 // PURPOSE: demo
 //    DATE: 2020-04-09
 //    (c) : MIT
@@ -90,3 +89,4 @@ float val(int sensorValueA1)
 
 
 // -- END OF FILE --
+
