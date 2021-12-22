@@ -54,6 +54,8 @@ Please note the fail example as this shows that in the intern math overflow can 
 - Investigate class implementation for performance / footprint
 - flag if input value was "IN_MIN" <  input < "IN_MAX", 
   now it is constrained without user being informed.
+- extend unit tests
+
 
 **wont**
 - should the lookup tables be merged into one array of pairs?

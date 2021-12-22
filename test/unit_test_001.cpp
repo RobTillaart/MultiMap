@@ -77,6 +77,7 @@ unittest(test_float)
 }
 
 
+/* todo
 unittest(test_uint32_t)
 {
   // based on the distance example
@@ -93,7 +94,7 @@ unittest(test_uint32_t)
   assertEqual( 20, multiMap<uint32_t>(500, in, out, 14) );
   assertEqual( 20, multiMap<uint32_t>(600, in, out, 14) );
 }
-
+*/
 
 unittest_main()
 
