@@ -4,17 +4,22 @@
 // PURPOSE: demo
 //    DATE: 2023-06-23
 
+
 #include "MultiMap.h"
+
 
 long in[10] = { 0, 150, 300, 550, 850, 970, 1009, 1017, 1021, 1023 };
 long rlog10[10] = { 1023, 1000, 972, 909, 761, 586, 390, 264, 102, 0};
+
+
+volatile int x;
+
 
 //  as formula
 int revlog10(int raw)
 {
   return round((1023 / 3.01) *  log10(1023 - raw));
 }
-
 
 
 void setup()
@@ -61,7 +66,6 @@ void loop()
 void performance()
 {
   uint32_t start, dur1, dur2;
-  volatile int x;
 
   start = micros();
   for (int i = 0; i < 1024; i++)
@@ -86,5 +90,6 @@ void performance()
   Serial.println();
   delay(100);
 }
+
 
 //  -- END OF FILE --
