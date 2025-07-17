@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.2.1] - 2025-07-17
 - update readme.md
 - add multiMap_demo.ino
+- add multiMap_2d.ino; simulates map float => {x, y} position.
 - minor edits
 
 ## [0.2.0] - 2023-11-12

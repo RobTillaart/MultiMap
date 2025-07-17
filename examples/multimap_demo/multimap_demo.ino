@@ -2,6 +2,7 @@
 //    FILE: multimap_demo.ino
 //  AUTHOR: Rob Tillaart
 // PURPOSE: demo
+//     URL: https://github.com/RobTillaart/MultiMap
 //     URL: https://forum.arduino.cc/t/messy-math-with-map-and-pow/1275821
 //          https://wokwi.com/projects/401812192306752513
 
@@ -15,10 +16,17 @@ float out[] = { 1, 2.8, 4.5, 7.0, 10.4, 33.5, 57.5, 100, 120 };
 
 int size = 9;
 
+
 void setup()
 {
+  //  while(!Serial);
   Serial.begin(115200);
-  while(!Serial);
+  Serial.println();
+  Serial.println(__FILE__);
+  Serial.print("MULTIMAP_LIB_VERSION: ");
+  Serial.println(MULTIMAP_LIB_VERSION);
+  Serial.println();
+
   Serial.println("X\tY");
 
   for (int i = 0; i <= 500; i++)
@@ -31,8 +39,10 @@ void setup()
   }
 }
 
+
 void loop()
 {
 }
+
 
 //  -- END OF FILE --
