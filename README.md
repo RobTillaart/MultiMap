@@ -47,7 +47,7 @@ An important feature of the **multiMap()** is that the points do not need to hav
 distance (non-equidistant). This allows to have more pointe where needed (curvy line) and 
 less point where possible (straight lines).
 
-Note: some functions are hard to approximate even with multiMap() as they go to infinity 
+Note: some functions are hard to approximate even with **multiMap()** as they go to infinity 
 or have a singularity.
 Think of **tan(x)** around x = PI/2 (90°) or **sin(1/x)** around zero.
 

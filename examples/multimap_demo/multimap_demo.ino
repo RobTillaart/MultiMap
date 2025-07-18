@@ -1,7 +1,7 @@
 //
 //    FILE: multimap_demo.ino
 //  AUTHOR: Rob Tillaart
-// PURPOSE: demo
+// PURPOSE: minimal demo
 //     URL: https://github.com/RobTillaart/MultiMap
 //     URL: https://forum.arduino.cc/t/messy-math-with-map-and-pow/1275821
 //          https://wokwi.com/projects/401812192306752513
