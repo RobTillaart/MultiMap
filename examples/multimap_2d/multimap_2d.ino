@@ -1,7 +1,7 @@
 //
 //    FILE: multimap_2d.ino
 //  AUTHOR: Rob Tillaart
-// PURPOSE: demo mapping an angle on a semi-circle (2D position)
+// PURPOSE: demo mapping an angle on a semi-circle (2D {x, y} position)
 //     URL: https://github.com/RobTillaart/MultiMap
 //
 //  when printing into a plotter one sees a rough sine and cosine
