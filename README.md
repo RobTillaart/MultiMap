@@ -57,12 +57,19 @@ However there might be more than one input value mapping onto the same output va
 See - https://en.wikipedia.org/wiki/Bijection,_injection_and_surjection
 
 
-### 0.3.0
+### 0.3.0 Breaking change
+
+This 0.3.0 version makes the previous versions obsolete.
 
 Since 0.3.0 sizes of multiMap can exceed 256 elements, up to 65535 elements.
 This is because the size has changed from an uint8_t => uint16_t.
 
-On an UNO R3 this type change improved performance.
+More important the internal math has an extra float cast as when using int types
+there was sometimes an overflow in the interpolation (rare but wrong).
+
+On an UNO R3 this breaking change altered the performance.
+Linear search got better, binary search got worse but is still
+better than the linear search.
 
 From **multimap_BS_compare.ino** version 0.2.1 versus 0.3.0.
 
@@ -74,13 +81,17 @@ From **multimap_BS_compare.ino** version 0.2.1 versus 0.3.0.
 |   0.2.1   |   30   |  28476  |  22712  |    79.76  |
 |   0.2.1   |   40   |  41516  |  29620  |    71.35  |
 |   0.2.1   |   50   |  56896  |  36608  |    64.34  |
+|   0.2.1   |   70   |  94716  |  50700  |    53.53  |
+|   0.2.1   |   90   | 141936  |  65136  |    45.89  |
 |           |        |         |         |           |
-|   0.3.0   |   10   |   9308  |   9344  |   100.39  |
-|   0.3.0   |   15   |  12936  |  12588  |    97.31  |
-|   0.3.0   |   20   |  17052  |  15892  |    93.20  |
-|   0.3.0   |   30   |  26728  |  22608  |    84.59  |
-|   0.3.0   |   40   |  38340  |  29476  |    76.88  |
-|   0.3.0   |   50   |  51900  |  36420  |    70.17  |
+|   0.3.0   |   10   |  10592  |  10688  |   100.91  |
+|   0.3.0   |   15   |  14528  |  14736  |   101.43  |
+|   0.3.0   |   20   |  18808  |  18868  |   100.32  |
+|   0.3.0   |   30   |  28412  |  27240  |    95.87  |
+|   0.3.0   |   40   |  39396  |  35784  |    90.83  |
+|   0.3.0   |   50   |  51764  |  44428  |    85.83  |
+|   0.3.0   |   70   |  80648  |  61864  |    76.71  |
+|   0.3.0   |   90   | 115068  |  79640  |    69.21  |
 |           |        |         |         |           |
 
 
@@ -154,6 +165,7 @@ Performance tests indicate that for array sizes of about 10 elements,
 the **multiMapBS()** is on par with **multiMap()**.
 This is an expected value as both need on average about 5 steps to find
 the right interval to interpolate.
+From 20 elements and up **multiMapBS()** is normally faster.
 
 Be sure to do your own tests to see if MMBS improves your performance.
 
