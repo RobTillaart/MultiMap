@@ -18,7 +18,7 @@ Arduino library for fast non-linear mapping or interpolation of values.
 
 In Arduino applications often the 'raw' value of a sensor is mapped upon a more
 usable value. E.g. the value of analogRead() 0 .. 1023 is mapped onto 0 .. 5.0 Volt.
-This is often done by the **map()** function which does a linear interpolation 
+This is often done by the **map()** function which does a linear interpolation
 with integer truncating.
 
 This means in code:
@@ -27,34 +27,61 @@ This means in code:
     output = C1 + input * C2
 ```
 
-As C1 and C2 are to be determined, Arduino has the **map()** function that calculates the 
-two variables runtime from two given mapping points (I1, O1) and (I2, O2).
+As C1 and C2 are constants to be determined, Arduino has the **map()** function that
+calculates the two variables runtime from two given mapping points (I1, O1) and (I2, O2).
 
 ```cpp
     output = map(input, I1, I2, O1, O2):
 ```
 
-In many cases when there is no linear mapping possible as the 'points' are not 
+In many cases there is no linear mapping possible as the 'points' are not
 on a single straight line. Think a logarithmic or some sine wave form.
 To solve this one needs non-linear math to calculate the output from a given input.
 
-The **multiMap()** function simulates this math by approximating the non-linear function with multiple
-linear line segments. 
-Of course this approximation introduces an error. 
-By increasing the number of points and choose their position strategically the average error 
-can and will be reduced. 
-An important feature of the **multiMap()** is that the points do not need to have the same 
-distance (non-equidistant). This allows to have more pointe where needed (curvy line) and 
+The **multiMap()** function simulates this math by approximating the non-linear function with
+multiple linear line segments.
+Of course this approximation introduces an error.
+By increasing the number of points and choose their position strategically the average error
+can and will be reduced.
+An important feature of the **multiMap()** is that the points do not need to have the same
+distance (non-equidistant). This allows to have more pointe where needed (curvy line) and
 less point where possible (straight lines).
 
-Note: some functions are hard to approximate even with **multiMap()** as they go to infinity 
+Note: some functions are hard to approximate even with **multiMap()** as they go to infinity
 or have a singularity.
 Think of **tan(x)** around x = PI/2 (90°) or **sin(1/x)** around zero.
 
-The function to approximate must be (mathematically) an injection. 
-This means that for every input value (in the given range) there is an output value. 
+The function to approximate must be (mathematically) an injection.
+This means that for every input value (in the given range) there is an output value.
 However there might be more than one input value mapping onto the same output value.
 See - https://en.wikipedia.org/wiki/Bijection,_injection_and_surjection
+
+
+### 0.3.0
+
+Since 0.3.0 sizes of multiMap can exceed 256 elements, up to 65535 elements.
+This is because the size has changed from an uint8_t => uint16_t.
+
+On an UNO R3 this type change improved performance.
+
+From **multimap_BS_compare.ino** version 0.2.1 versus 0.3.0.
+
+|  version  |  size  |    t1   |    t2   |   ratio   |
+|:----------|:------:|--------:|--------:|----------:|
+|   0.2.1   |   10   |   9476  |   9364  |    98.82  |
+|   0.2.1   |   15   |  13348  |  12628  |    94.61  |
+|   0.2.1   |   20   |  17808  |  15948  |    89.56  |
+|   0.2.1   |   30   |  28476  |  22712  |    79.76  |
+|   0.2.1   |   40   |  41516  |  29620  |    71.35  |
+|   0.2.1   |   50   |  56896  |  36608  |    64.34  |
+|           |        |         |         |           |
+|   0.3.0   |   10   |   9308  |   9344  |   100.39  |
+|   0.3.0   |   15   |  12936  |  12588  |    97.31  |
+|   0.3.0   |   20   |  17052  |  15892  |    93.20  |
+|   0.3.0   |   30   |  26728  |  22608  |    84.59  |
+|   0.3.0   |   40   |  38340  |  29476  |    76.88  |
+|   0.3.0   |   50   |  51900  |  36420  |    70.17  |
+|           |        |         |         |           |
 
 
 ### Related
@@ -86,14 +113,14 @@ The basic call for **multiMap()** is:
 output = Multimap<datatype>(input, inputArray, outputArray, size);
 ```
 
-**multiMap()** needs two equally sized arrays representing the reference 'points' named 
+**multiMap()** needs two equally sized arrays representing the reference 'points' named
 **inputArray\[\]** and **outputArray\[\]** both of the **datatype**.
 
 **multiMap()** will do a lookup of the input value in the **inputArray\[\]**.
 If it cannot find the index of an exact point it will determine a weighted position between two points.
 This optional weighted point is used to interpolate a value from the data in the **outputArray\[\]**.
 
-- The **inputArray\[\]** must have increasing values, 
+- The **inputArray\[\]** must have increasing values,
 there is no such restriction for the **output\[\]** array.
 - The values of the **inputArray\[\]** do not need to have the same distance (non-equidistant).
 E.g a sort of logarithmic input array like { 1, 10, 100, 1000 } is valid.
@@ -109,7 +136,7 @@ This implies that usage of larger and more precise arrays will take more time.
 Furthermore "low" input values will be found faster than "high" values, so the function
 has no constant time execution.
 
-To optimize performance a binary search version exists, see **multiMapBS()** below. 
+To optimize performance a binary search version exists, see **multiMapBS()** below.
 
 As every usage of **multiMap()** is unique one should always do a performance check to see
 if there is a substantial gain in the case at hand. In my experience there often is.
@@ -123,9 +150,9 @@ Experimental 0.1.7 => use with care.
 It is a very similar function as **multiMap()** with the same interface.
 The main difference is that MMBS uses binary search instead of linear search.
 
-Performance tests indicate that for array sizes of about 10 elements, 
-the **multiMapBS()** is on par with **multiMap()**. 
-This is an expected value as both need on average about 5 steps to find 
+Performance tests indicate that for array sizes of about 10 elements,
+the **multiMapBS()** is on par with **multiMap()**.
+This is an expected value as both need on average about 5 steps to find
 the right interval to interpolate.
 
 Be sure to do your own tests to see if MMBS improves your performance.
@@ -141,7 +168,7 @@ The goal is to improve the performance by preventing searching a repeating input
 value over and over again.
 
 If the input sequence has a lot of repeating values e.g. 2 2 2 2 2 2 5 5 5 5 5 4 4 4 4 2 2 2 2 2 2
-MMC will be able to return the value from cache often. 
+MMC will be able to return the value from cache often.
 Otherwise keeping cache is overhead.
 
 Be sure to do your own tests to see if MMC improves your performance.
@@ -156,7 +183,7 @@ It would allow a to test that value and improve the linear search.
 Experimental 0.2.0 => use with care.
 
 **multiMap<T1, T2>()** or MMTT for short, is a very similar function as **multiMap()**.
-The main difference is that MMTT uses two different types, typical the input 
+The main difference is that MMTT uses two different types, typical the input
 is an integer type and the output is a float or double type.
 It is expected that there will be a gain if two different sized integer types are used.
 So performance is platform specific.
@@ -221,7 +248,7 @@ Please note the fail example as this shows that in the intern math overflow can 
   - less parameter passing
   - **isInRange(value)**?
   - caching last value / position / index (does that help?)
-  - flag if input value was "IN_MIN" <  input < "IN_MAX", 
+  - flag if input value was "IN_MIN" <  input < "IN_MAX",
     now it is constrained without user being informed.
 - Investigate a 2D multiMap, 3D multiMap
   - is it possible / feasible?  (YES | ??)
@@ -230,14 +257,15 @@ Please note the fail example as this shows that in the intern math overflow can 
   - complex ==> complex (?)
   - X ==> { Y, Z } in fact 2 output arrays.
   - needs other API call.
-  - can be implemented with multiple single MM calls, 
+  - can be implemented with multiple single MM calls,
     one per dimension.
 - can the single type version be implemented with the two type version?
+- add cache variants for binary search?
 
 #### Wont
 
 - should the lookup tables be merged into one array of pairs?
-  - you cannot reuse e.g. the input array or the output array then. 
+  - you cannot reuse e.g. the input array or the output array then.
     this would not improve the memory footprint.
 
 
