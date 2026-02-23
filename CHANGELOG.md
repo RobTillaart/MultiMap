@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.3.0] - 2026-02-23
 - fix #13, allow size to be 65535 (uint16_t)
-- fix truncating when using int result types (cast to float in math).
+- fix math overflow when using int result types.
 - add multi type **multiMapCache<T1, T2>** to have all options.
 - update readme.md
 - update GitHub actions
