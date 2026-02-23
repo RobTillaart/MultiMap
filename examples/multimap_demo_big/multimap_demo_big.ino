@@ -39,7 +39,7 @@ void setup()
     int16_t y = multiMap<uint16_t, int16_t>(i, in, out, 300);
     Serial.print(i);
     Serial.print("\t");
-    Serial.println(y * 0.01);  //  1 decimal
+    Serial.println(y * 0.01);
   }
 }
 
