@@ -8,8 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.3.0] - 2026-02-23
 - fix #13, allow size to be 65535 (uint16_t)
-- fix math overflow when using int result types.
-- add multi type **multiMapCache<T1, T2>** to have all options.
+- add patch for mixed math signed / unsigned multiMap. 
+- add multi type **multiMapCache<T1, T2>** as it was missing.
 - update readme.md
 - update GitHub actions
 - minor edits

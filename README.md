@@ -57,6 +57,26 @@ However there might be more than one input value mapping onto the same output va
 See - https://en.wikipedia.org/wiki/Bijection,_injection_and_surjection
 
 
+### Math problems in interpolation (rare).
+
+In multiMap the interpolation math can fail. This happens when integer types are used 
+that are too small to handle the multiplication in the interpolation (e.g. 8 or 16 bit)
+Also when a mixed signed / unsigned types are used this can happen.
+
+There are two solutions to handle this.
+- (preferred) use float (double) as either input or output type.
+This forces casting to float in the interpolation solving the math problem.
+Drawback is it might take extra memory (e.g. int16_t => float).
+- The multiMap.h file contains **commented** code to cast the interpolation 
+during the interpolation only.
+Comment the existing interpolation and uncomment the other line.
+This saves memory as the arrays used do not "grow". 
+
+Note both solutions have a performance penalty
+
+See the sketch **multimap_demo_fail.ino** (UNO R3) to show the problem.
+
+
 ### 0.3.0 Breaking change
 
 This 0.3.0 version makes the previous versions obsolete.
@@ -64,35 +84,13 @@ This 0.3.0 version makes the previous versions obsolete.
 Since 0.3.0 sizes of multiMap can exceed 256 elements, up to 65535 elements.
 This is because the size has changed from an uint8_t => uint16_t.
 
-More important the internal math has an extra float cast as when using int types
-there was sometimes an overflow in the interpolation (rare but wrong).
+On an UNO R3 the change of the size to uint16_t altered the performance.
+Linear search got better, binary search got worse but still performs
+better than the linear search in a test.
 
-On an UNO R3 this breaking change altered the performance.
-Linear search got better, binary search got worse but is still
-better than the linear search.
+Run **multimap_BS_compare.ino** to see the differences.
 
-From **multimap_BS_compare.ino** version 0.2.1 versus 0.3.0.
-
-|  version  |  size  |    t1   |    t2   |   ratio   |
-|:----------|:------:|--------:|--------:|----------:|
-|   0.2.1   |   10   |   9476  |   9364  |    98.82  |
-|   0.2.1   |   15   |  13348  |  12628  |    94.61  |
-|   0.2.1   |   20   |  17808  |  15948  |    89.56  |
-|   0.2.1   |   30   |  28476  |  22712  |    79.76  |
-|   0.2.1   |   40   |  41516  |  29620  |    71.35  |
-|   0.2.1   |   50   |  56896  |  36608  |    64.34  |
-|   0.2.1   |   70   |  94716  |  50700  |    53.53  |
-|   0.2.1   |   90   | 141936  |  65136  |    45.89  |
-|           |        |         |         |           |
-|   0.3.0   |   10   |  10592  |  10688  |   100.91  |
-|   0.3.0   |   15   |  14528  |  14736  |   101.43  |
-|   0.3.0   |   20   |  18808  |  18868  |   100.32  |
-|   0.3.0   |   30   |  28412  |  27240  |    95.87  |
-|   0.3.0   |   40   |  39396  |  35784  |    90.83  |
-|   0.3.0   |   50   |  51764  |  44428  |    85.83  |
-|   0.3.0   |   70   |  80648  |  61864  |    76.71  |
-|   0.3.0   |   90   | 115068  |  79640  |    69.21  |
-|           |        |         |         |           |
+(output logs of UNO R3 are in the example folder).
 
 
 ### Related

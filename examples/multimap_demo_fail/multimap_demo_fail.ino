@@ -1,15 +1,21 @@
 //
-//    FILE: multimap_demo_big.ino
+//    FILE: multimap_demo_fail.ino
 //  AUTHOR: Rob Tillaart
 // PURPOSE: minimal demo
 //     URL: https://github.com/RobTillaart/MultiMap
 //
+//  compare to multimap_demo_big.ino.
+//
+//  View this demo on the serial plotter how it fails (at least on UNO R3)
+//  due to a mix of signed and unsigned math.
+//  If you need this mapping and it fails for you 
+//  the interpolation in MultiMap.h needs the casting line.
 
 
 #include "MultiMap.h"
 
-//  both are signed.
-int16_t in[300];
+//  note mixed signs
+uint16_t in[300];
 int16_t out[300];
 
 
@@ -33,7 +39,7 @@ void setup()
 
   for (int i = 0; i <= 500; i++)
   {
-    int16_t y = multiMap<int16_t, int16_t>(i, in, out, 300);
+    int16_t y = multiMap<uint16_t, int16_t>(i, in, out, 300);
     Serial.print(i);
     Serial.print("\t");
     Serial.println(y * 0.01);

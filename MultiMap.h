@@ -36,7 +36,9 @@ T multiMap(T value, T* _in, T* _out, uint16_t size)
   if (value == _in[pos]) return _out[pos];
 
   //  interpolate in the right segment for the rest
-  return T(float(value - _in[pos-1]) * (_out[pos] - _out[pos-1]) / (_in[pos] - _in[pos-1])) + _out[pos-1];
+  return (value - _in[pos-1]) * (_out[pos] - _out[pos-1]) / (_in[pos] - _in[pos-1]) + _out[pos-1];
+  //  if interpolation overflows use this line
+  //  return T(float(value - _in[pos-1]) * (_out[pos] - _out[pos-1]) / (_in[pos] - _in[pos-1])) + _out[pos-1];
 }
 
 
@@ -83,7 +85,9 @@ T multiMapCache(T value, T* _in, T* _out, uint16_t size)
     else
     {
       //  interpolate in the right segment for the rest
-      cache = T(float(value - _in[pos-1]) * (_out[pos] - _out[pos-1]) / (_in[pos] - _in[pos-1])) + _out[pos-1];
+      cache = (value - _in[pos-1]) * (_out[pos] - _out[pos-1]) / (_in[pos] - _in[pos-1]) + _out[pos-1];
+      //  if interpolation overflows use this line
+      //  cache = T(float(value - _in[pos-1]) * (_out[pos] - _out[pos-1]) / (_in[pos] - _in[pos-1])) + _out[pos-1];
     }
   }
   return cache;
@@ -114,7 +118,10 @@ T multiMapBS(T value, T* _in, T* _out, uint16_t size)
     if (value >= _in[mid]) lower = mid;
     else upper = mid;
   }
-  return T(float(value - _in[lower]) * (_out[upper] - _out[lower]) / (_in[upper] - _in[lower])) + _out[lower];
+  //  interpolate in the right segment for the rest
+  return (value - _in[lower]) * (_out[upper] - _out[lower]) / (_in[upper] - _in[lower]) + _out[lower];
+  //  if interpolation overflows use this line
+  //  return T(float(value - _in[lower]) * (_out[upper] - _out[lower]) / (_in[upper] - _in[lower])) + _out[lower];
 }
 
 
@@ -138,7 +145,9 @@ T2 multiMap(T1 value, T1* _in, T2* _out, uint16_t size)
   if (value == _in[pos]) return _out[pos];
 
   //  interpolate in the right segment for the rest
-  return T2(float(value - _in[pos-1]) * (_out[pos] - _out[pos-1]) / (_in[pos] - _in[pos-1])) + _out[pos-1];
+  return (value - _in[pos-1]) * (_out[pos] - _out[pos-1]) / (_in[pos] - _in[pos-1]) + _out[pos-1];
+  //  if interpolation overflows use this line
+  //  return T2(float(value - _in[pos-1]) * (_out[pos] - _out[pos-1]) / (_in[pos] - _in[pos-1])) + _out[pos-1];
 }
 
 
@@ -185,7 +194,9 @@ T2 multiMapCache(T1 value, T1* _in, T2* _out, uint16_t size)
     else
     {
       //  interpolate in the right segment for the rest
-      cache = T2(float(value - _in[pos-1]) * (_out[pos] - _out[pos-1]) / (_in[pos] - _in[pos-1])) + _out[pos-1];
+      cache = (value - _in[pos-1]) * (_out[pos] - _out[pos-1]) / (_in[pos] - _in[pos-1]) + _out[pos-1];
+      //  if interpolation overflows use this line
+      //  return T2(float(value - _in[pos-1]) * (_out[pos] - _out[pos-1]) / (_in[pos] - _in[pos-1])) + _out[pos-1];
     }
   }
   return cache;
@@ -215,8 +226,10 @@ T2 multiMapBS(T1 value, T1* _in, T2* _out, uint16_t size)
     if (value >= _in[mid]) lower = mid;
     else upper = mid;
   }
-
-  return T2(float(value - _in[lower]) * (_out[upper] - _out[lower]) / (_in[upper] - _in[lower])) + _out[lower];
+  //  interpolate in the right segment for the rest
+  return (value - _in[lower]) * (_out[upper] - _out[lower]) / (_in[upper] - _in[lower]) + _out[lower];
+  //  if interpolation overflows use this line
+  //  return T2(float(value - _in[lower]) * (_out[upper] - _out[lower]) / (_in[upper] - _in[lower])) + _out[lower];
 }
 
 
